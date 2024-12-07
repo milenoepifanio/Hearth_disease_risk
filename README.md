@@ -1,4 +1,4 @@
-_Este projeto consiste no trabalho final de Machine Learning II da trilha de Data Science do Programa Santander Coders 2024.1._ 
+Este projeto consiste no trabalho final de Machine Learning II da trilha de Data Science do Programa Santander Coders 2024.1._ 
 
 * **Módulo** Machine Learning II
 * **Instrutor:** Prof. Rogério Marinardes ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/rogerioomds/))
@@ -104,6 +104,10 @@ A estrutura do repositório é a seguinte:
 ├── data/
 │   └── df_preprocessed.csv       # Dataset Pré-processado e balanceado
 |   └── CVD_cleaned.csv           # Dataset limpo, como disponibilizado no Kaggle
+├── images/
+│   └── boxplot.ong               # Boxplot das variáveis numéricas
+|   └── heat.png                  # Heatmap das variáveis numéricas
+|   └── age.png                   # Histograma das idades
 ├── src/
 │   ├── EDA.py                    # Análise exploratória dos dados
 │   ├── model_preprocess.py       # Pré-processamento do modelo
@@ -115,9 +119,15 @@ A estrutura do repositório é a seguinte:
 
 
 ## Insights da Análise Exploratória de Dados
-- Maioria dos casos diagnósticados são em mulheres
-- Usuários diagnósticados tinham a pré-disposição de consumo maior de álcool, mais peso (massa corporal), consumiam do tabagismo e idades mais velhas.
 
+    - Maioria dos casos diagnósticados são em mulheres
+    - Usuários diagnósticados tinham a pré-disposição de consumo maior de álcool, mais peso (massa corporal), consumiam do tabagismo e idades mais velhas.
+<div align="center">
+    
+![Boxplot dos dados numéricos](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/boxplot.png?raw=true)
+
+![Heatmap das variáveis numéricas](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true)
+</div>
 
 ## Features
 
@@ -129,13 +139,44 @@ Os dados prontos para treinamento estão salvos em seus devidos diretórios.
 ### Features Numéricas
 As features numericas são Height_(cm), Weight_(kg), BMI, Alcohol_Consumption, Fruit_Consumption, Green_Vegetables_Consumption e FriedPotato_Consumption.  
 
+## Pre-Processamento
 
-## Sobre as Métricas
+- A variável categórica ["General_health"] foi codificada para cada categoria receber um peso entre 1 a 5, sendo 1 equivalente a "Poor" e 5 a "Excelent"
+- As variáveis ['Exercise', 'Heart_Disease', 'Skin_Cancer', 'Other_Cancer', 'Depression', 'Arthritis', 'Smoking_History'] que apresentavam respostas sim/não, foram codificadas para 1/0
+- Para a vadiável ['Diabetes'] consideramos as respostas apenas sim ou não.
+- A variável 'Sex, foi codificada para Female = 1, Male = 0
+- O restante das variáveis categóricas foram encodadas por One-hot encoding.
+
+## Modeling
+- O Dataset é altamente desbalanceado quanto ao target de doenças cardíacas, com apenas 8% destas.
+  Também por ser um dataset muito grande, tivemos inicialmente problemas para treinar os modelos por conta do consumo de memória.
+  Então optamos pela tecnica de balanceamento de undersampling, ajustando o dataset de treino para apresentar 25% de prevalência de doenças cardiacas.
+
+- Realizamos Tuning de hiper-parâmetros, para encontrar os modelos mais otimizados possíveis.
+
+- Para ajudar a balancear os dados também utilizamos ajuste de pesos nas classes nos modelos XGBoost e LGBM, para que a classe minoritária seja mais valorizada durante o treinamento.
+
+##  Métricas de validação
 
 Precision: Mede quantos dos indivíduos identificados como de alto risco realmente possuem doenças cardiovasculares. Alta precision significa que o modelo está focando nos casos mais prováveis de risco, reduzindo falsos positivos.
-
-Impacto: Ajuda a evitar alarmes desnecessários, garantindo diagnósticos mais confiáveis para profissionais de saúde.
+    Impacto: Ajuda a evitar alarmes desnecessários, garantindo diagnósticos mais confiáveis para profissionais de saúde.
 
 Recall: Avalia a proporção de indivíduos com doenças cardiovasculares corretamente identificados pelo modelo. Um recall elevado indica que o sistema é eficaz em não perder casos reais de risco.
+    Impacto: Essencial para maximizar a detecção de pacientes em potencial, contribuindo para intervenções precoces e maior alcance no cuidado preventivo.
 
-Impacto: Essencial para maximizar a detecção de pacientes em potencial, contribuindo para intervenções precoces e maior alcance no cuidado preventivo.
+Escolhemos o Recall como métrica principal para nosso modelo, visando otimizar a detecção prévia de doenças cardiacas. 
+
+## Resultados
+
+### Supervisionados
+    #### XGBoost
+        Melhores parâmetros: {'subsample': 0.6, 'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.1}
+        Recall: 0.3143123543123543
+
+    #### AdaBoost
+    Melhores parâmetros: {'n_estimators': 100, 'learning_rate': 1}
+    Recall: 0.3143935727422321
+
+    
+
+
