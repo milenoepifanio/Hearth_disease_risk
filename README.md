@@ -105,9 +105,12 @@ A estrutura do repositório é a seguinte:
 │   └── df_preprocessed.csv       # Dataset Pré-processado e balanceado
 |   └── CVD_cleaned.csv           # Dataset limpo, como disponibilizado no Kaggle
 ├── images/
-│   └── boxplot.ong               # Boxplot das variáveis numéricas
+│   └── boxplot.png               # Boxplot das variáveis numéricas
 |   └── heat.png                  # Heatmap das variáveis numéricas
 |   └── age.png                   # Histograma das idades
+│   └── Adaboost.png              # Graficos de avaliação de métricas do modelo
+|   └── Lgbm.png                  # Graficos de avaliação de métricas do modelo
+|   └── XGB.png                   # Graficos de avaliação de métricas do modelo
 ├── src/
 │   ├── EDA.py                    # Análise exploratória dos dados
 │   ├── model_preprocess.py       # Pré-processamento do modelo
@@ -121,7 +124,8 @@ A estrutura do repositório é a seguinte:
 ## Insights da Análise Exploratória de Dados
 
     - Maioria dos casos diagnósticados são em mulheres
-    - Usuários diagnósticados tinham a pré-disposição de consumo maior de álcool, mais peso (massa corporal), consumiam do tabagismo e idades mais velhas.
+    - Usuários diagnósticados tinham a pré-disposição de consumo maior de álcool, 
+      mais peso (massa corporal), consumiam do tabagismo e idades mais avançadas.
 <div align="center">
     
 ![Boxplot dos dados numéricos](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/boxplot.png?raw=true)
@@ -147,7 +151,9 @@ As features numericas são Height_(cm), Weight_(kg), BMI, Alcohol_Consumption, F
 - A variável 'Sex, foi codificada para Female = 1, Male = 0
 - O restante das variáveis categóricas foram encodadas por One-hot encoding.
 
-## Modeling
+## Supervisionados
+
+### Modeling
 - O Dataset é altamente desbalanceado quanto ao target de doenças cardíacas, com apenas 8% destas.
   Também por ser um dataset muito grande, tivemos inicialmente problemas para treinar os modelos por conta do consumo de memória.
   Então optamos pela tecnica de balanceamento de undersampling, ajustando o dataset de treino para apresentar 25% de prevalência de doenças cardiacas.
@@ -156,7 +162,7 @@ As features numericas são Height_(cm), Weight_(kg), BMI, Alcohol_Consumption, F
 
 - Para ajudar a balancear os dados também utilizamos ajuste de pesos nas classes nos modelos XGBoost e LGBM, para que a classe minoritária seja mais valorizada durante o treinamento.
 
-##  Métricas de validação
+###  Métricas de validação
 
 Precision: Mede quantos dos indivíduos identificados como de alto risco realmente possuem doenças cardiovasculares. Alta precision significa que o modelo está focando nos casos mais prováveis de risco, reduzindo falsos positivos.
     Impacto: Ajuda a evitar alarmes desnecessários, garantindo diagnósticos mais confiáveis para profissionais de saúde.
@@ -164,19 +170,22 @@ Precision: Mede quantos dos indivíduos identificados como de alto risco realmen
 Recall: Avalia a proporção de indivíduos com doenças cardiovasculares corretamente identificados pelo modelo. Um recall elevado indica que o sistema é eficaz em não perder casos reais de risco.
     Impacto: Essencial para maximizar a detecção de pacientes em potencial, contribuindo para intervenções precoces e maior alcance no cuidado preventivo.
 
-Escolhemos o Recall como métrica principal para nosso modelo, visando otimizar a detecção prévia de doenças cardiacas. 
+Escolhemos o Recall como métrica principal para nosso modelo, visando otimizar a detecção prévia de doenças cardiacas.
 
-## Resultados
+Nenhum dos modelos apresentou um bom recall.
 
-### Supervisionados
-    #### XGBoost
-        Melhores parâmetros: {'subsample': 0.6, 'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.1}
-        Recall: 0.3143123543123543
+### Resultados
 
-    #### AdaBoost
-    Melhores parâmetros: {'n_estimators': 100, 'learning_rate': 1}
-    Recall: 0.3143935727422321
+#### XGBoost
+Melhores parâmetros: {'subsample': 0.6, 'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.1}
+![[Heatmap das variáveis numéricas](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true)](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/xgb.png?raw=true)
+        
+#### AdaBoost
+Melhores parâmetros: {'n_estimators': 100, 'learning_rate': 1}
+![[Heatmap das variáveis numéricas](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true)](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/adaboost.png?raw=true)
 
-    
+#### LGBM
+Melhores parâmetros: {'subsample': 0.8, 'reg_lambda': 0.1, 'reg_alpha': 0.1, 'num_leaves': 50, 'n_estimators': 500, 'min_child_samples': 100, 'max_depth': -1, 'learning_rate': 0.5, 'colsample_bytree': 1.0}
+![https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/LGBM.png?raw=true))
 
 
