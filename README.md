@@ -102,7 +102,7 @@ A estrutura do repositório é a seguinte:
 ```
 .
 ├── data/
-│   └── df_preprocessed.csv       # Dataset Pré-processado e balanceado
+│   └── df_preprocessed.csv       # Dataset Pré-processado
 |   └── CVD_cleaned.csv           # Dataset limpo, como disponibilizado no Kaggle
 ├── images/
 │   └── boxplot.png               # Boxplot das variáveis numéricas
@@ -115,7 +115,6 @@ A estrutura do repositório é a seguinte:
 │   ├── EDA.py                    # Análise exploratória dos dados
 │   ├── model_preprocess.py       # Pré-processamento do modelo
 │   ├── model_training.py         # treinamento e avaliação do modelo
-│   ├── results_analysis.py       # Avaliação do modelo
 ├── requirements.txt              # Dependências do projeto
 └── README.md                     # Este arquivo
 ```
@@ -151,8 +150,6 @@ As features numericas são Height_(cm), Weight_(kg), BMI, Alcohol_Consumption, F
 - A variável 'Sex, foi codificada para Female = 1, Male = 0
 - O restante das variáveis categóricas foram encodadas por One-hot encoding.
 
-## Supervisionados
-
 ### Modeling
 - O Dataset é altamente desbalanceado quanto ao target de doenças cardíacas, com apenas 8% destas.
   Também por ser um dataset muito grande, tivemos inicialmente problemas para treinar os modelos por conta do consumo de memória.
@@ -176,16 +173,23 @@ Nenhum dos modelos apresentou um bom recall.
 
 ### Resultados
 
-#### XGBoost
+#### Supervisionados
+
+##### XGBoost
 Melhores parâmetros: {'subsample': 0.6, 'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.1}
 ![[Heatmap das variáveis numéricas](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true)](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/xgb.png?raw=true)
         
-#### AdaBoost
+##### AdaBoost
 Melhores parâmetros: {'n_estimators': 100, 'learning_rate': 1}
 ![[Heatmap das variáveis numéricas](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true)](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/adaboost.png?raw=true)
 
-#### LGBM
+##### LGBM
 Melhores parâmetros: {'subsample': 0.8, 'reg_lambda': 0.1, 'reg_alpha': 0.1, 'num_leaves': 50, 'n_estimators': 500, 'min_child_samples': 100, 'max_depth': -1, 'learning_rate': 0.5, 'colsample_bytree': 1.0}
 ![https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/heat.png?raw=true](https://github.com/Larita404/Hearth_disease_risk/blob/main/imagens/LGBM.png?raw=true))
 
 
+#### Não-Supervisionado
+n_init=10, n_clusters=5, max_iter=200, init='k-means++'
+Kmeans
+
+Silhouette Score: 0.22209011230133122
