@@ -1,36 +1,15 @@
-# Cardiovascular Diseases Risk Prediction
+_Este projeto consiste no trabalho final de Machine Learning II da trilha de Data Science do Programa Santander Coders 2024.1._ 
 
-Este repositório contém dois modelos principais para prever o risco de doenças cardiovasculares usando o Cardiovascular Diseases Risk Prediction Dataset, que é baseado no conjunto de dados BRFSS 2021 (Behavioral Risk Factor Surveillance System), fornecido pelos Centers for Disease Control and Prevention (CDC).
+* **Módulo** Machine Learning II
+* **Instrutor:** Prof. Rogério Marinardes ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/rogerioomds/))
+* **Grupo**: 
+    - Larissa ([GitHub](https://github.com/Larita404) / [LinkedIn](https://www.linkedin.com/in/larissatoscano/));
+    - Mileno Epifânio ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/milenoepifanio/));
 
-O projeto utiliza duas abordagens de aprendizado de máquina:
 
-Modelo Supervisionado baseado em Ensemble de Boosting, otimizado para maximizar o recall na previsão do risco de doenças cardiovasculares.
-Modelo Não Supervisionado de Classificação para identificar padrões e grupos de risco sem a necessidade de rótulos.
+## Dataset - Cardiovascular Diseases Risk Prediction
 
-## Objetivo
-
-O principal objetivo deste projeto é prever o risco de doenças cardiovasculares em indivíduos com base em características relacionadas a estilo de vida e saúde. Utilizamos duas abordagens para alcançar esse objetivo:
-
-**Modelo Supervisionado:** Treinamos um ensemble de modelos de boosting (como XGBoost, LightGBM ou AdaBoost) para classificar os indivíduos com maior risco de doenças cardiovasculares, com ênfase na maximização do recall para detectar corretamente casos positivos (indivíduos de alto risco).
-
-**Modelo Não Supervisionado:** Aplicamos técnicas de clustering (K-means) para descobrir padrões e grupos de indivíduos com características semelhantes, identificando segmentos de alto risco sem a necessidade de rótulos de classe.
-
-## Dataset
-
-O dataset utilizado é o **2021 BRFSS Dataset** (Behavioral Risk Factor Surveillance System), fornecido pelo **CDC**. Ele contém informações sobre diversos conhecidos fatores de risco para doenças crônicas, incluindo doenças cardiovasculares:
-
-- Idade
-- Gênero
-- Índice de Massa Corporal (IMC)
-- Pressão arterial
-- Níveis de atividade física
-- Histórico de tabagismo
-- Consumo de álcool
-- Entre outros fatores.
-
-Você pode encontrar o dataset completo no [Kaggle](https://www.kaggle.com/datasets/alphiree/cardiovascular-diseases-risk-prediction-dataset).
-
-### Estrutura do Dataset
+O dataset utilizado é o **2021 BRFSS Dataset** (Behavioral Risk Factor Surveillance System), fornecido pelo **CDC** (Centers for Disease Control and Prevention). Ele contém informações sobre diversos conhecidos fatores de risco para doenças crônicas, incluindo doenças cardiovasculares. 
 
 O dataset contém as seguintes colunas:
 
@@ -54,7 +33,51 @@ O dataset contém as seguintes colunas:
         - Green_Vegetables_Consumption (Consumo de Legumes Verdes): Frequência de consumo de vegetais verdes.
         - FriedPotato_Consumption (Consumo de Batata Frita): Frequência de consumo de batatas fritas.
 
-##Requisitos
+Você pode encontrar o dataset completo no [Kaggle](https://www.kaggle.com/datasets/alphiree/cardiovascular-diseases-risk-prediction-dataset).
+
+
+## Problema de Negócio  
+As doenças cardiovasculares representam uma das principais causas de mortalidade no mundo, demandando ações preventivas eficazes para 
+reduzir seu impacto na saúde pública. O problema que este projeto busca resolver é: **como prever o risco de doenças cardiovasculares em 
+indivíduos, permitindo intervenções precoces e personalizadas?**  
+
+Um sistema preditivo eficiente possibilita identificar indivíduos com alto risco, priorizando ações preventivas e reduzindo os custos 
+associados ao tratamento de complicações avançadas. Além disso, promove uma abordagem mais direcionada para políticas de saúde pública 
+e melhora a qualidade de vida dos pacientes em potencial.  
+
+---
+
+## Objetivos  
+
+### Prever o Risco Cardiovascular  
+Desenvolver um modelo de classificação que estime o risco de doenças cardiovasculares em indivíduos com base em fatores relacionados a estilo de vida, histórico médico e dados demográficos.  
+
+### Apoiar Decisões de Intervenção  
+Automatizar a identificação de indivíduos de alto risco com o uso de algoritmos preditivos, permitindo intervenções mais rápidas, eficazes e baseadas em evidências.  
+
+### Aprimorar Estratégias de Saúde Preventiva  
+Fornecer insights para auxiliar profissionais de saúde e formuladores de políticas na definição de estratégias que reduzam a incidência de doenças cardiovasculares na população.  
+
+
+
+
+## Sobre o projeto
+
+Este projeto visa desenvolver um sistema preditivo focado no risco de doenças cardiovasculares em indivíduos com base em características relacionadas a estilo de vida e saúde. Utilizamos duas abordagens para alcançar esse objetivo:
+
+**Modelo Supervisionado:** Treinamos um ensemble de modelos de boosting (como XGBoost, LightGBM ou AdaBoost) para classificar os indivíduos com maior risco, com ênfase na maximização do recall para detectar corretamente casos positivos (indivíduos de alto risco).
+
+**Modelo Não Supervisionado:** Aplicamos técnicas de clustering (K-means) para descobrir padrões e grupos de indivíduos com características semelhantes, identificando segmentos de alto risco sem a necessidade de rótulos de classe.
+
+## Instalação 
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/Larita404/Hearth_disease_risk.git
+```
+
+## Requisitos
 Para executar este projeto, você precisará de:
 
 - Python 3.8+
@@ -89,4 +112,30 @@ A estrutura do repositório é a seguinte:
 ├── requirements.txt              # Dependências do projeto
 └── README.md                     # Este arquivo
 ```
-  
+
+
+## Insights da Análise Exploratória de Dados
+- Maioria dos casos diagnósticados são em mulheres
+- Usuários diagnósticados tinham a pré-disposição de consumo maior de álcool, mais peso (massa corporal), consumiam do tabagismo e idades mais velhas.
+
+
+## Features
+
+### Features Categóricas
+As features categóricas que precisamos pré-processar foram 'General_Health' 'Checkup', 'Exercise', 'Heart_Disease', 'Skin_Cancer', 'Other_Cancer', 'Depression', 'Diabetes', 'Arthritis', 'Sex', 'Age_Category', 'Smoking_History', nas quais utilizamos One-hot Enconder.
+
+Os dados prontos para treinamento estão salvos em seus devidos diretórios.
+
+### Features Numéricas
+As features numericas são Height_(cm), Weight_(kg), BMI, Alcohol_Consumption, Fruit_Consumption, Green_Vegetables_Consumption e FriedPotato_Consumption.  
+
+
+## Sobre as Métricas
+
+Precision: Mede quantos dos indivíduos identificados como de alto risco realmente possuem doenças cardiovasculares. Alta precision significa que o modelo está focando nos casos mais prováveis de risco, reduzindo falsos positivos.
+
+Impacto: Ajuda a evitar alarmes desnecessários, garantindo diagnósticos mais confiáveis para profissionais de saúde.
+
+Recall: Avalia a proporção de indivíduos com doenças cardiovasculares corretamente identificados pelo modelo. Um recall elevado indica que o sistema é eficaz em não perder casos reais de risco.
+
+Impacto: Essencial para maximizar a detecção de pacientes em potencial, contribuindo para intervenções precoces e maior alcance no cuidado preventivo.
