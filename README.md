@@ -1,7 +1,7 @@
 Este projeto consiste no trabalho final de Machine Learning II da trilha de Data Science do Programa Santander Coders 2024.1._ 
 
 * **Módulo** Machine Learning II
-* **Instrutor:** Prof. Rogério Marinardes ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/rogerioomds/))
+* **Instrutor:** Prof. Rogério Mainardes ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/rogerioomds/))
 * **Grupo**: 
     - Larissa ([GitHub](https://github.com/Larita404) / [LinkedIn](https://www.linkedin.com/in/larissatoscano/));
     - Mileno Epifânio ([GitHub](https://github.com/milenoepifanio) / [LinkedIn](https://www.linkedin.com/in/milenoepifanio/));
